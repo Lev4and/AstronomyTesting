@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AstronomyTesting.Response
+namespace AstronomyTesting.Api.Service
 {
-    public class Class1
+    public class ConfigDb
     {
+        public static string ConnectionStringDb { get; set; }
     }
 }
