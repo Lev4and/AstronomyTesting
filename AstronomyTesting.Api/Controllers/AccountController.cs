@@ -18,7 +18,7 @@ namespace AstronomyTesting.Api.Controllers
             _dataManager = dataManager;
         }
 
-        [HttpGet("users")]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             try
@@ -37,17 +37,65 @@ namespace AstronomyTesting.Api.Controllers
         {
             if (fullName != null ? fullName.Length == 0 : true)
             {
-                throw new ArgumentNullException("fullName", "Полное имя пользователя не может быть пустым или длиной 0 символов.");
+                return BadRequest();
             }
 
             if (password != null ? password.Length == 0 : true)
             {
-                throw new ArgumentNullException("password", "Пароль не может быть пустым или длиной 0 символов.");
+                return BadRequest();
             }
 
             try
             {
                 return Ok(_dataManager.Users.ContainsUser(fullName, password));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPut("addUser")]
+        [Route("addUser/roleId={roleId}&fullName={fullName}&password={password}")]
+        public async Task<IActionResult> PutAddUser(int roleId, string fullName, string password)
+        {
+            if (fullName != null ? fullName.Length == 0 : true)
+            {
+                return BadRequest();
+            }
+
+            if (password != null ? password.Length == 0 : true)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return Ok(_dataManager.Users.AddUser(roleId, fullName, password));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpGet("userByFullNameAndPassword")]
+        [Route("userByFullNameAndPassword/fullName={fullName}&password={password}")]
+        public async Task<IActionResult> GetUserByFullNameAndPassword(string fullName, string password)
+        {
+            if (fullName != null ? fullName.Length == 0 : true)
+            {
+                return BadRequest();
+            }
+
+            if (password != null ? password.Length == 0 : true)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                return Ok(_dataManager.Users.GetUserByFullNameAndPassword(fullName, password));
             }
             catch
             {

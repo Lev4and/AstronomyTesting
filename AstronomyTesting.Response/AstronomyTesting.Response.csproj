@@ -59,6 +59,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestClients\AccountRestClient.cs" />
     <Compile Include="RestClients\BaseRestClient.cs" />
+    <Compile Include="RestClients\GroupsRestClient.cs" />
+    <Compile Include="RestClients\RolesRestClient.cs" />
+    <Compile Include="RestClients\StudentsRestClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

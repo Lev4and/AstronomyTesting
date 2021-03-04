@@ -8,6 +8,7 @@ namespace AstronomyTesting.Response.RestClients
     {
         protected private string _baseUrl;
         protected private HttpClient _client;
+        protected private HttpContent _content;
         protected private HttpClientHandler _clientHandler;
 
         public BaseRestClient(string baseUrl)

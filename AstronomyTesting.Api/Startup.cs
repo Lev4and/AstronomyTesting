@@ -24,6 +24,9 @@ namespace AstronomyTesting.Api
         {
             Configuration.Bind("ConfigDb", new ConfigDb());
 
+            services.AddTransient<IGroupsRepository, EFGroupsRepository>();
+            services.AddTransient<IRolesRepository, EFRolesRepository>();
+            services.AddTransient<IStudentsRepository, EFStudentsRepository>();
             services.AddTransient<IUsersRepository, EFUsersRepository>();
             services.AddTransient<DataManager>();
 
