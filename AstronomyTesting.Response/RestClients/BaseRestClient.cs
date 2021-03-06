@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstronomyTesting.Response.Service;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
@@ -7,13 +8,14 @@ namespace AstronomyTesting.Response.RestClients
     public class BaseRestClient
     {
         protected private string _baseUrl;
+
         protected private HttpClient _client;
         protected private HttpContent _content;
         protected private HttpClientHandler _clientHandler;
 
-        public BaseRestClient(string baseUrl)
+        public BaseRestClient(string controllerName)
         {
-            _baseUrl = baseUrl;
+            _baseUrl = ConfigRestClients.GetAddressServer(controllerName);
 
             _clientHandler = new HttpClientHandler();
             _clientHandler.AllowAutoRedirect = false;

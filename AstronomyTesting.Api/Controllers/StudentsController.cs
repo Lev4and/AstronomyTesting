@@ -1,5 +1,6 @@
 ﻿using AstronomyTesting.Model;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace AstronomyTesting.Api.Controllers
@@ -16,13 +17,19 @@ namespace AstronomyTesting.Api.Controllers
             _dataManager = dataManager;
         }
 
-        [HttpPut("addStudent")]
-        [Route("addStudent/userId={userId}&groupId={groupId}")]
-        public async Task<IActionResult> PutAddStudent(int userId, int groupId)
+        [HttpPost("addStudent")]
+        public async Task<IActionResult> PostAddStudent([FromBody]dynamic obj)
         {
             try
             {
-                return Ok(_dataManager.Students.AddStudent(userId, groupId));
+                if (_dataManager.Students.AddStudent(Convert.ToInt32(obj.UserId), Convert.ToInt32(obj.GroupId)))
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Conflict();
+                }
             }
             catch
             {

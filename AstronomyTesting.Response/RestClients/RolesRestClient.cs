@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AstronomyTesting.Response.RestClients
 {
     public class RolesRestClient : BaseRestClient
     {
-        public RolesRestClient() : base("https://localhost:5001/api/roles/")
+        public RolesRestClient() : base("roles")
         {
 
         }

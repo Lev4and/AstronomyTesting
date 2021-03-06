@@ -63,12 +63,12 @@
                             </Grid>
                             <Grid Grid.Column="1" Margin="5,0,0,0">
                                 <dxe:TextEdit 
-                                    x:Name="LoginTextEdit"
+                                    x:Name="FullNameTextEdit"
                                     VerticalContentAlignment="Center"
                                     FontSize="20"
                                     FontWeight="Medium"
-                                    Text="{Binding Path=Login, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                    ToolTip="{Binding ElementName=LoginTextEdit, Path=Text}"/>
+                                    Text="{Binding Path=FullName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    ToolTip="{Binding ElementName=FullNameTextEdit, Path=Text}"/>
                             </Grid>
                         </Grid>
                         <Grid

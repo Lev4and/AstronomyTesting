@@ -5,7 +5,7 @@ namespace AstronomyTesting.Response.RestClients
 {
     public class GroupsRestClient : BaseRestClient
     {
-        public GroupsRestClient() : base("https://localhost:5001/api/groups/")
+        public GroupsRestClient() : base("groups")
         {
 
         }

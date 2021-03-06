@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +7,7 @@ namespace AstronomyTesting.Response.RestClients
 {
     public class StudentsRestClient : BaseRestClient
     {
-        public StudentsRestClient() : base("https://localhost:5001/api/students/")
+        public StudentsRestClient() : base("students")
         {
 
         }
@@ -18,7 +16,7 @@ namespace AstronomyTesting.Response.RestClients
         {
             try
             {
-                return _client.PutAsync($"addStudent/userId={userId}&groupId={groupId}", new StringContent(""));
+                return _client.PostAsync("addStudent", new StringContent($"{JsonConvert.SerializeObject(new { UserId = userId, GroupId = groupId })}", Encoding.UTF8, "application/json"));
             }
             catch
             {

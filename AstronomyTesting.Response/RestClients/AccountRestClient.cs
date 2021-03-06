@@ -1,11 +1,13 @@
-﻿using System.Net.Http;
+﻿using Newtonsoft.Json;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace AstronomyTesting.Response.RestClients
 {
     public class AccountRestClient : BaseRestClient
     {
-        public AccountRestClient() : base("https://localhost:5001/api/account/")
+        public AccountRestClient() : base("account")
         {
 
         }
@@ -38,7 +40,7 @@ namespace AstronomyTesting.Response.RestClients
         {
             try
             {
-                return _client.PutAsync($"addUser/roleId={roleId}&fullName={fullName}&password={password}", new StringContent(""));
+                return _client.PostAsync("addUser", new StringContent(JsonConvert.SerializeObject(new { RoleId = roleId, FullName = fullName, Password = password }), Encoding.UTF8, "application/json"));
             }
             catch
             {

@@ -1,11 +1,18 @@
-﻿using DevExpress.Mvvm;
+﻿using AstronomyTesting.Response.Converters;
+using AstronomyTesting.Response.RestClients;
+using DevExpress.Mvvm;
 using DevExpress.Mvvm.POCO;
+using System.Windows;
 
 namespace AstronomyTesting.DevExpressTemplateGalleryWpf.ViewModels
 {
     public class AuthorizationViewModel : ViewModelBase
     {
-        public virtual string Login { get; set; }
+        private RolesRestClient _rolesClient;
+        private AccountRestClient _accountsClient;
+        private StudentsRestClient _studentsClient;
+
+        public virtual string FullName { get; set; }
 
         public virtual string Password { get; set; }
 
@@ -13,7 +20,12 @@ namespace AstronomyTesting.DevExpressTemplateGalleryWpf.ViewModels
 
         protected AuthorizationViewModel()
         {
-            Login = "";
+            _rolesClient = new RolesRestClient();
+
+            _accountsClient = new AccountRestClient();
+            _studentsClient = new StudentsRestClient();
+
+            FullName = "";
             Password = "";
         }
 
@@ -24,9 +36,9 @@ namespace AstronomyTesting.DevExpressTemplateGalleryWpf.ViewModels
 
         public bool CanAuthorization()
         {
-            if(Login != null && Password != null)
+            if(FullName != null && Password != null)
             {
-                return Login.Length > 0 && Password.Length > 0;
+                return FullName.Length > 0 && Password.Length > 0;
             }
 
             return false;
@@ -34,7 +46,14 @@ namespace AstronomyTesting.DevExpressTemplateGalleryWpf.ViewModels
 
         public void Authorization()
         {
-
+            if (HttpResponseMessageConverter.GetResult<bool>(_accountsClient.ContainsUser(FullName, Password)))
+            {
+                MessageBox.Show("Успех.");
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль.", "Ошибка");
+            }
         }
 
         public void Back()

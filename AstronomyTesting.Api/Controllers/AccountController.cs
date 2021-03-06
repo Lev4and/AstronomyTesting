@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AstronomyTesting.Api.Controllers
@@ -55,23 +56,19 @@ namespace AstronomyTesting.Api.Controllers
             }
         }
 
-        [HttpPut("addUser")]
-        [Route("addUser/roleId={roleId}&fullName={fullName}&password={password}")]
-        public async Task<IActionResult> PutAddUser(int roleId, string fullName, string password)
+        [HttpPost("addUser")]
+        public async Task<IActionResult> PostAddUser([FromBody]dynamic obj)
         {
-            if (fullName != null ? fullName.Length == 0 : true)
-            {
-                return BadRequest();
-            }
-
-            if (password != null ? password.Length == 0 : true)
-            {
-                return BadRequest();
-            }
-
             try
             {
-                return Ok(_dataManager.Users.AddUser(roleId, fullName, password));
+                if(_dataManager.Users.AddUser(Convert.ToInt32(obj.RoleId), Convert.ToString(obj.FullName), Convert.ToString(obj.Password)))
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Conflict();
+                }
             }
             catch
             {
