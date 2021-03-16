@@ -70,11 +70,16 @@
   <ItemGroup>
     <Compile Include="Converters\HttpResponseMessageConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RestClients\AccountRestClient.cs" />
+    <Compile Include="RestClients\AccountsRestClient.cs" />
+    <Compile Include="RestClients\AnswersRestClient.cs" />
     <Compile Include="RestClients\BaseRestClient.cs" />
+    <Compile Include="RestClients\DetailsOfTheTestRestClient.cs" />
     <Compile Include="RestClients\GroupsRestClient.cs" />
+    <Compile Include="RestClients\QuestionsRestClient.cs" />
     <Compile Include="RestClients\RolesRestClient.cs" />
+    <Compile Include="RestClients\StudentAnswersRestClient.cs" />
     <Compile Include="RestClients\StudentsRestClient.cs" />
+    <Compile Include="RestClients\TestsRestClient.cs" />
     <Compile Include="Service\ConfigRestClients.cs" />
     <Compile Include="Service\HttpStatusCodeMessageService.cs" />
     <Compile Include="Events\ShowHttpStatusCodeMessageEventArgs.cs" />

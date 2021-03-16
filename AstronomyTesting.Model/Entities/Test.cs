@@ -13,12 +13,13 @@ namespace AstronomyTesting.Model.Entities
         }
 
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public DateTime DateOfCreating { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public int? Duration { get; set; }
+        public int MaximumNumberOfQuestions { get; set; }
 
         public virtual ICollection<Question> Questions { get; set; }
     }

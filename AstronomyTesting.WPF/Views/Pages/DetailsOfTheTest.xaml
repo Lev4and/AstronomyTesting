@@ -1,0 +1,94 @@
+﻿<Page
+    x:Class="AstronomyTesting.WPF.Views.Pages.DetailsOfTheTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:AstronomyTesting.WPF.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdc="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+    xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="Детали тестирования"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    DataContext="{Binding DetailsOfTheTestViewModel, Source={StaticResource ViewModelLocator}}"
+    WindowTitle="Тестирование по астрономии - Детали тестирования"
+    mc:Ignorable="d">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button
+                Margin="0,5,0,5"
+                HorizontalAlignment="Left"
+                Panel.ZIndex="1"
+                Command="{Binding Path=Back}"
+                Content="{mdt:PackIcon ArrowLeftCircle}"
+                ToolTip="Вернуться к тестам" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="0,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Details}"
+                        Style="{StaticResource DetailsButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Details}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid
+                    CellStyle="{StaticResource DefaultDataGridCellStyle}"
+                    ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeaderStyle}"
+                    HorizontalScrollBarVisibility="Visible"
+                    ItemsSource="{Binding Path=DetailsOfTheTest, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedValue="{Binding Path=SelectedStudentId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedValuePath="studentId"
+                    Style="{StaticResource DefaultDataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=studentName}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Полное имя студента" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=groupName}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Группа" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=testDateTime, StringFormat={}{0: dd-MM-yyyy HH:mm:ss}}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Дата и время прохождения" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=countAnswers}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Кол-во ответов" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=countCorrectedAnswers}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Кол-во правильных ответов" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

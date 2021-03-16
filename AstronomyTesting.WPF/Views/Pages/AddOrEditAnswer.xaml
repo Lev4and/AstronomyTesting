@@ -1,0 +1,112 @@
+﻿<Page
+    x:Class="AstronomyTesting.WPF.Views.Pages.AddOrEditAnswer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:AstronomyTesting.WPF.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdc="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+    xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="Добавление или изменение ответа"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    DataContext="{Binding AddOrEditAnswerViewModel, Source={StaticResource ViewModelLocator}}"
+    WindowTitle="Тестирование по астрономии - Добавление или изменение ответа"
+    mc:Ignorable="d">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button
+                Margin="0,5,0,5"
+                HorizontalAlignment="Left"
+                Panel.ZIndex="1"
+                Command="{Binding Path=Back}"
+                Content="{mdt:PackIcon ArrowLeftCircle}"
+                ToolTip="Вернуться в главное меню" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid
+                    Grid.Row="0"
+                    Height="50"
+                    Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <mdt:PackIcon
+                            x:Name="IconForum"
+                            Width="{Binding ElementName=IconForum, Path=Height}"
+                            Height="Auto"
+                            Kind="Forum"
+                            ToolTip="Ответ" />
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="5,0,0,0">
+                        <TextBox
+                            x:Name="NameTextBox"
+                            VerticalContentAlignment="Center"
+                            mdt:HintAssist.HelperText="Ответ должен быть больше 0 символов"
+                            mdt:HintAssist.Hint="Ответ"
+                            FontSize="20"
+                            FontWeight="Medium"
+                            Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            ToolTip="{Binding ElementName=NameTextBox, Path=Text}" />
+                    </Grid>
+                </Grid>
+                <Grid
+                    Grid.Row="1"
+                    Height="50"
+                    Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <mdt:PackIcon
+                            x:Name="IconOrderBoolAscendingVariant"
+                            Width="{Binding ElementName=IconOrderBoolAscendingVariant, Path=Height}"
+                            Height="Auto"
+                            Kind="OrderBoolAscendingVariant"
+                            ToolTip="Правильный ли?" />
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="5,0,0,0">
+                        <CheckBox
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            mdt:CheckBoxAssist.CheckBoxSize="45"
+                            IsChecked="{Binding Path=IsСorrect, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            Content="Правильный ли?"
+                            FontSize="20"
+                            FontWeight="Medium" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Margin="5">
+                    <Grid VerticalAlignment="Bottom">
+                        <mdt:Badged
+                            Margin="0,12,0,0"
+                            HorizontalAlignment="Center"
+                            Badge="{mdt:PackIcon Kind=ContentSaveCog}">
+                            <Button
+                                Height="50"
+                                Command="{Binding Path=Save}"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                ToolTip="Сохранить">
+                                <TextBlock Text="Сохранить" />
+                            </Button>
+                        </mdt:Badged>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

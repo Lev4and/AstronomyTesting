@@ -1,0 +1,36 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AstronomyTesting.DevExpressTemplateGalleryWpf.Views.Styles">
+    <Style x:Key="AddImageButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource AddImageButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="RemoveImageButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource RemoveImageButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="AddButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource AddButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="ChangeButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource ChangeButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="RemoveButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource RemoveButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="DetailsButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource DetailsButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="PlayButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource PlayButtonTemplate}" />
+    </Style>
+
+    <Style x:Key="StatisticsButtonStyle" TargetType="Button">
+        <Setter Property="Template" Value="{StaticResource StatisticsButtonTemplate}" />
+    </Style>
+</ResourceDictionary>

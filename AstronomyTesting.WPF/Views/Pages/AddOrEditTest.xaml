@@ -1,0 +1,257 @@
+﻿<Page
+    x:Class="AstronomyTesting.WPF.Views.Pages.AddOrEditTest"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:AstronomyTesting.WPF.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdc="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+    xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="Добавление или изменение теста"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    DataContext="{Binding AddOrEditTestViewModel, Source={StaticResource ViewModelLocator}}"
+    WindowTitle="Тестирование по астрономии - Добавление или изменение теста"
+    mc:Ignorable="d">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button
+                Margin="0,5,0,5"
+                HorizontalAlignment="Left"
+                Panel.ZIndex="1"
+                Command="{Binding Path=Back}"
+                Content="{mdt:PackIcon ArrowLeftCircle}"
+                ToolTip="Вернуться в главное меню" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid
+                        Grid.Row="0"
+                        Height="50"
+                        Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <mdt:PackIcon
+                                x:Name="IconFormTextbox"
+                                Width="{Binding ElementName=IconFormTextbox, Path=Height}"
+                                Height="Auto"
+                                Kind="FormTextbox"
+                                ToolTip="Название теста" />
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <TextBox
+                                x:Name="NameTextBox"
+                                VerticalContentAlignment="Center"
+                                mdt:HintAssist.HelperText="Название теста должно быть больше 0 символов"
+                                mdt:HintAssist.Hint="Название теста"
+                                FontSize="20"
+                                FontWeight="Medium"
+                                Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                ToolTip="{Binding ElementName=NameTextBox, Path=Text}" />
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        Grid.Row="1"
+                        Height="250"
+                        Margin="5,15,5,15">
+                        <GroupBox
+                            BorderThickness="3"
+                            FontSize="24"
+                            FontWeight="Medium"
+                            Header="Описание">
+                            <Grid>
+                                <TextBox
+                                    AcceptsReturn="True"
+                                    Background="White"
+                                    FontSize="14"
+                                    Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto" />
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <Grid
+                        Grid.Row="2"
+                        Height="50"
+                        Margin="5,15,5,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="0,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <mdt:PackIcon
+                                    x:Name="IconCalendarCheck"
+                                    Width="{Binding ElementName=IconCalendarCheck, Path=Height}"
+                                    Height="Auto"
+                                    Kind="CalendarCheck"
+                                    ToolTip="Дата начала проведения" />
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="5,0,5,0">
+                                <DatePicker
+                                    x:Name="StartDateDatePicker"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Укажите дату начала проведения"
+                                    mdt:HintAssist.Hint="Дата"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    SelectedDate="{Binding Path=StartDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    ToolTip="{Binding ElementName=StartDateDatePicker, Path=Text}" />
+                            </Grid>
+                            <Grid Grid.Column="2" Margin="5,0,0,0">
+                                <mdt:TimePicker
+                                    x:Name="StartDateTimePicker"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Укажите время начала проведения"
+                                    mdt:HintAssist.Hint="Время"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    Is24Hours="True"
+                                    SelectedTime="{Binding Path=StartTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    SelectedTimeFormat="Long"
+                                    ToolTip="{Binding ElementName=StartDateTimePicker, Path=Text}"
+                                    WithSeconds="True" />
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <mdt:PackIcon
+                                    x:Name="IconCalendarRemove"
+                                    Width="{Binding ElementName=IconCalendarRemove, Path=Height}"
+                                    Height="Auto"
+                                    Kind="CalendarRemove"
+                                    ToolTip="Дата окончания проведения" />
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="5,0,5,0">
+                                <DatePicker
+                                    x:Name="ExpirationDateDatePicker"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Укажите дату окончания проведения"
+                                    mdt:HintAssist.Hint="Дата"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    SelectedDate="{Binding Path=ExpirationDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    ToolTip="{Binding ElementName=ExpirationDateDatePicker, Path=Text}" />
+                            </Grid>
+                            <Grid Grid.Column="2" Margin="5,0,0,0">
+                                <mdt:TimePicker
+                                    x:Name="ExpirationDateTimePicker"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Укажите время окончания проведения"
+                                    mdt:HintAssist.Hint="Время"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    Is24Hours="True"
+                                    SelectedTime="{Binding Path=ExpirationTime, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    SelectedTimeFormat="Long"
+                                    ToolTip="{Binding ElementName=ExpirationDateTimePicker, Path=Text}"
+                                    WithSeconds="True" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        Grid.Row="3"
+                        Height="50"
+                        Margin="5,15,5,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="0,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <mdt:PackIcon
+                                    x:Name="IconClock"
+                                    Width="{Binding ElementName=IconClock, Path=Height}"
+                                    Height="Auto"
+                                    Kind="Clock"
+                                    ToolTip="Длительность выполненения" />
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                                <TextBox
+                                    x:Name="DurationTextBox"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Длительность выполненения можно не указывать"
+                                    mdt:HintAssist.Hint="Длительность выполненения"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    ToolTip="{Binding ElementName=DurationTextBox, Path=Text}" />
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="5,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <mdt:PackIcon
+                                    x:Name="IconHelp"
+                                    Width="{Binding ElementName=IconHelp, Path=Height}"
+                                    Height="Auto"
+                                    Kind="Help"
+                                    ToolTip="Максимальное число вопросов" />
+                            </Grid>
+                            <Grid Grid.Column="1" Margin="5,0,0,0">
+                                <TextBox
+                                    x:Name="MaximumNumberOfQuestionsTextBox"
+                                    VerticalContentAlignment="Center"
+                                    mdt:HintAssist.HelperText="Укажите максимальное число вопросов"
+                                    mdt:HintAssist.Hint="Максимальное число вопросов"
+                                    FontSize="20"
+                                    FontWeight="Medium"
+                                    Text="{Binding Path=MaximumNumberOfQuestions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                    ToolTip="{Binding ElementName=MaximumNumberOfQuestionsTextBox, Path=Text}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4" Margin="5">
+                        <Grid VerticalAlignment="Bottom">
+                            <mdt:Badged
+                                Margin="0,12,0,0"
+                                HorizontalAlignment="Center"
+                                Badge="{mdt:PackIcon Kind=ContentSaveCog}">
+                                <Button
+                                    Height="50"
+                                    Command="{Binding Path=Save}"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    ToolTip="Сохранить">
+                                    <TextBlock Text="Сохранить" />
+                                </Button>
+                            </mdt:Badged>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

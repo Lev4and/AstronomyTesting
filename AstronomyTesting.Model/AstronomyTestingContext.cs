@@ -26,6 +26,8 @@ namespace AstronomyTesting.Model
         public virtual DbSet<StudentAnswer> StudentAnswers { get; set; }
         public virtual DbSet<Test> Tests { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<VDetailsOfTheStudentPassingTheTest> VDetailsOfTheStudentPassingTheTests { get; set; }
+        public virtual DbSet<VDetailsOfTheTest> VDetailsOfTheTests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -170,7 +172,11 @@ namespace AstronomyTesting.Model
                     .HasColumnType("datetime")
                     .HasColumnName("expiration_date");
 
-                entity.Property(e => e.Name).HasColumnName("name");
+                entity.Property(e => e.MaximumNumberOfQuestions).HasColumnName("maximum_number_of_questions");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name");
 
                 entity.Property(e => e.StartDate)
                     .HasColumnType("datetime")
@@ -197,6 +203,75 @@ namespace AstronomyTesting.Model
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("FK_user_role");
+            });
+
+            modelBuilder.Entity<VDetailsOfTheStudentPassingTheTest>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("v_details_of_the_student_passing_the_test");
+
+                entity.Property(e => e.AnswerId).HasColumnName("answer_id");
+
+                entity.Property(e => e.AnswerIsCorrect).HasColumnName("answer_is_correct");
+
+                entity.Property(e => e.AnswerName)
+                    .IsRequired()
+                    .HasColumnName("answer_name");
+
+                entity.Property(e => e.CorrectAnswer).HasColumnName("correct_answer");
+
+                entity.Property(e => e.QuestionId).HasColumnName("question_id");
+
+                entity.Property(e => e.QuestionName)
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("question_name");
+
+                entity.Property(e => e.StudentId).HasColumnName("student_id");
+
+                entity.Property(e => e.StudentName)
+                    .IsRequired()
+                    .HasColumnName("student_name");
+
+                entity.Property(e => e.TestId).HasColumnName("test_id");
+
+                entity.Property(e => e.TestName)
+                    .IsRequired()
+                    .HasColumnName("test_name");
+            });
+
+            modelBuilder.Entity<VDetailsOfTheTest>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToView("v_details_of_the_test");
+
+                entity.Property(e => e.CountAnswers).HasColumnName("count_answers");
+
+                entity.Property(e => e.CountCorrectedAnswers).HasColumnName("count_corrected_answers");
+
+                entity.Property(e => e.CountQuestions).HasColumnName("count_questions");
+
+                entity.Property(e => e.GroupId).HasColumnName("group_id");
+
+                entity.Property(e => e.GroupName)
+                    .IsRequired()
+                    .HasColumnName("group_name");
+
+                entity.Property(e => e.MaximumNumberOfQuestions).HasColumnName("maximum_number_of_questions");
+
+                entity.Property(e => e.StudentId).HasColumnName("student_id");
+
+                entity.Property(e => e.StudentName)
+                    .IsRequired()
+                    .HasColumnName("student_name");
+
+                entity.Property(e => e.TestDateTime)
+                    .HasColumnType("datetime")
+                    .HasColumnName("test_date_time");
+
+                entity.Property(e => e.TestId).HasColumnName("test_id");
             });
 
             OnModelCreatingPartial(modelBuilder);

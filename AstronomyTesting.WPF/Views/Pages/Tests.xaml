@@ -1,0 +1,174 @@
+﻿<Page
+    x:Class="AstronomyTesting.WPF.Views.Pages.Tests"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:AstronomyTesting.WPF.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mdc="clr-namespace:MaterialDesignColors;assembly=MaterialDesignColors"
+    xmlns:mdt="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="Тесты"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    DataContext="{Binding TestsViewModel, Source={StaticResource ViewModelLocator}}"
+    WindowTitle="Тестирование по астрономии - Тесты"
+    mc:Ignorable="d">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button
+                Margin="0,5,0,5"
+                HorizontalAlignment="Left"
+                Panel.ZIndex="1"
+                Command="{Binding Path=Back}"
+                Content="{mdt:PackIcon ArrowLeftCircle}"
+                ToolTip="Вернуться в главное меню" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,10,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="0,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Add}"
+                        Style="{StaticResource AddButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Add}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1" Margin="5,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Change}"
+                        Style="{StaticResource ChangeButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Change}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="2" Margin="5,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Remove}"
+                        Style="{StaticResource RemoveButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Remove}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="3" Margin="5,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Details}"
+                        Style="{StaticResource DetailsButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Details}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="4" Margin="5,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Play}"
+                        Style="{StaticResource PlayButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Play}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="5" Margin="5,0,5,0">
+                    <Button
+                        Width="50"
+                        Height="50"
+                        Command="{Binding Path=Statistics}"
+                        Style="{StaticResource StatisticsButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding Path=Statistics}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid
+                    CellStyle="{StaticResource DefaultDataGridCellStyle}"
+                    ColumnHeaderStyle="{StaticResource DefaultDataGridColumnHeaderStyle}"
+                    HorizontalScrollBarVisibility="Visible"
+                    ItemsSource="{Binding Path=Tests, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedValue="{Binding Path=SelectedTestId, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    SelectedValuePath="id"
+                    Style="{StaticResource DefaultDataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=name}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Название" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=description}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Описание" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=dateOfCreating, StringFormat={}{0: dd-MM-yyyy HH:mm:ss}}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Дата публикации" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=startDate, StringFormat={}{0: dd-MM-yyyy HH:mm:ss}}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Дата начала проведения" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=expirationDate, StringFormat={}{0: dd-MM-yyyy HH:mm:ss}}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Дата окончания проведения" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=duration, TargetNullValue=Без ограничений}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Длительность выполнения" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=maximumNumberOfQuestions}">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="Максимальное число вопросов" TextAlignment="Center" />
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

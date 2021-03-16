@@ -24,10 +24,15 @@ namespace AstronomyTesting.Api
         {
             Configuration.Bind("ConfigDb", new ConfigDb());
 
-            services.AddTransient<IGroupsRepository, EFGroupsRepository>();
-            services.AddTransient<IRolesRepository, EFRolesRepository>();
-            services.AddTransient<IStudentsRepository, EFStudentsRepository>();
             services.AddTransient<IUsersRepository, EFUsersRepository>();
+            services.AddTransient<IRolesRepository, EFRolesRepository>();
+            services.AddTransient<ITestsRepository, EFTestsRepository>();
+            services.AddTransient<IGroupsRepository, EFGroupsRepository>();
+            services.AddTransient<IAnswersRepository, EFAnswersRepository>();
+            services.AddTransient<IStudentsRepository, EFStudentsRepository>();
+            services.AddTransient<IQuestionsRepository, EFQuestionsRepository>();
+            services.AddTransient<IStudentAnswersRepository, EFStudentAnswersRepository>();
+            services.AddTransient<IDetailsOfTheTestRepository, EFDetailsOfTheTestRepository>();
             services.AddTransient<DataManager>();
 
             services.AddDbContext<AstronomyTestingContext>((options) =>
@@ -35,6 +40,13 @@ namespace AstronomyTesting.Api
                 options.UseSqlServer(ConfigDb.ConnectionStringDb);
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder => 
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader());
+            });
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
@@ -46,6 +58,7 @@ namespace AstronomyTesting.Api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
 
             app.UseRouting();
 

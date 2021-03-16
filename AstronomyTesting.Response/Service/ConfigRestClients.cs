@@ -8,11 +8,11 @@ namespace AstronomyTesting.Response.Service
 
         public static string Domain { get; set; }
 
-        public static int? Port { get; set; }
+        public static string Port { get; set; }
 
         public static string GetAddressServer()
         {
-            return $"{Protocol}://{Domain}{(Port != null ? $":{Port}" : "")}/api/";
+            return $"{Protocol}://{Domain}{(Port.Length > 0 ? $":{Port}" : "")}/api/";
         }
 
         public static string GetAddressServer(string controllerName)
